@@ -11,8 +11,8 @@
 
 
   <ul>
-  {% for row in grades %}
-    <li><a href="/student?github={{ row[1] }}">{{ row[0] }}</a> received {{ row[2] }} on this project</li>
+  {% for first_name, github, grade in grades %}
+    <li><a href="/student?github={{ github }}">{{ first_name }}</a> received {{ grade }} on this project</li>
   {% endfor %}
   </ul>
 
