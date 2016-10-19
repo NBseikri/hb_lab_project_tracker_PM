@@ -83,6 +83,22 @@ def get_grade_by_github_title(github, title):
         github, title, row[0])
     return row
 
+def get_all_grades_by_title(title):
+    """"Prints all student grades for a project."""
+
+    QUERY = """
+        SELECT first_name, student_github, grade
+        FROM Grades
+            JOIN Students 
+                ON (github = student_github)
+                    WHERE project_title = :title
+    """
+
+    db_cursor = db.session.execute(QUERY, {'title': title})
+    rows = db_cursor.fetchall()
+    return rows # returns list of tuples in the form: 
+                # [(u'first_name', u'github', grade)]
+
 
 def assign_grade(github, title, grade):
     """Assign a student a grade on an assignment and print a confirmation."""
@@ -154,6 +170,10 @@ def handle_input():
             github, title = args
             get_grade_by_github_title(github, title)
 
+        elif command == "all_grades":
+            title = args[0]
+            get_all_grades_by_title(title)
+
         elif command == "assign_grade":
             github, title, grade = args
             assign_grade(github, title, grade)
@@ -165,6 +185,8 @@ def handle_input():
         elif command == "project_grades":
             title = args[0]
             get_grades_by_title(title)
+        else:
+            print "Command not recognized"
 
 
 

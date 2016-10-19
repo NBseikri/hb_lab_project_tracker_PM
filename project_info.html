@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Project Info</title>
+  <title>Project Info</title>
 </head>
 <body>
   <h1>{{ title }} </h1>
@@ -9,5 +9,20 @@
   <p>Description: {{ description }}</p>
   <p>Maximum Grade: {{ max_grade }}</p>
 
+
+  <!-- Receive report_card, a list of tuples with format [(first_name), (github), (grade)] -->
+  <ul>
+    {% for first_name, github, grade in grades %}
+    <li><a href="/student?github={{ github }}">{{ first_name }}</a> received {{ grade }} on this project</li>
+    {% endfor %}
+  </ul>
+
 </body>
 </html>
+
+
+
+
+
+
+

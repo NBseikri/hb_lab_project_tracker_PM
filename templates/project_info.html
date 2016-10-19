@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Project Info</title>
+  <title>Project Info</title>
 </head>
 <body>
   <h1>{{ title }} </h1>
@@ -9,5 +9,17 @@
   <p>Description: {{ description }}</p>
   <p>Maximum Grade: {{ max_grade }}</p>
 
+
+  <ul>
+  {% for row in grades %}
+    <li><a href="/student?github={{ row[1] }}">{{ row[0] }}</a> received {{ row[2] }} on this project</li>
+  {% endfor %}
+  </ul>
+
 </body>
 </html>
+
+
+
+
+

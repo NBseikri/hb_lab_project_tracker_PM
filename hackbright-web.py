@@ -55,10 +55,13 @@ def project_info():
 
     # print title, description, max_grade
 
+    grades = hackbright.get_grades_by_title(title)
+
     return render_template("project_info.html",
                            title=title,
                            description=description,
-                           max_grade=max_grade
+                           max_grade=max_grade,
+                           grades=grades
                            )
 
 
