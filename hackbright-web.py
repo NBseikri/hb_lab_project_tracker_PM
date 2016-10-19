@@ -11,10 +11,19 @@ def get_student():
 
     github = request.args.get('github', 'jhacks')
     first, last, github = hackbright.get_student_by_github(github)
+    grades = hackbright.get_grades_by_github(github)
+
+
+    # grades is a list of tuples where each item is a pair of strings.
+    # grades[0] = project title, and grades[1] = project grade
+
+    print grades, type(grades)
     html = render_template("student_info.html",
                            first=first,
                            last=last,
-                           github=github)
+                           github=github,
+                           grades=grades
+                           )
     return html
 
 @app.route("/student-search")
@@ -32,12 +41,10 @@ def student_add():
     last = request.form.get('last')
     github = request.form.get('github')
 
-
     hackbright.make_new_student(first, last, github)
 
     return render_template("student_added.html",
                            github=github)
-
 
 if __name__ == "__main__":
     hackbright.connect_to_db(app)
